@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, Button } from "@material-ui/core";
+import { RootState } from "../redux/reducers";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
 	createStyles({
 		root: {
 			justifyContent: "space-between"
@@ -13,6 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Header: React.FC = () => {
 	const classes = useStyles();
+
+	const { jwtToken } = useSelector(({ login }: RootState) => login);
+	console.log(jwtToken);
 
 	return (
 		<AppBar position='sticky'>
@@ -31,9 +36,13 @@ const Header: React.FC = () => {
 						<Link to='news'>News</Link>
 					</Button>
 				</Toolbar>
-				<Button color='inherit'>
-					<Link to='login'>Login</Link>
-				</Button>
+				{jwtToken ? (
+					<Button color='inherit'>Logout</Button>
+				) : (
+					<Button color='inherit'>
+						<Link to='login'>Login</Link>
+					</Button>
+				)}
 			</Toolbar>
 		</AppBar>
 	);
