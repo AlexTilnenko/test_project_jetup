@@ -17,6 +17,9 @@ const Header: React.FC = () => {
 				<li>
 					<Link to='login'>Authorization</Link>
 				</li>
+				<li>
+					<Link to='news'>News</Link>
+				</li>
 			</ul>
 		</div>
 	);
