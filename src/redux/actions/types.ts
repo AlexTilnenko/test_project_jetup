@@ -39,3 +39,11 @@ type RemoveCityAction = {
 };
 
 export type WeatherActions = SaveCityAction | RemoveCityAction;
+
+export const SET_INITIALIZED = "initialize/SET_INITIALIZED";
+type SetInitializedAction = {
+	type: typeof SET_INITIALIZED;
+	payload: boolean;
+};
+
+export type InitializeActions = SetInitializedAction;

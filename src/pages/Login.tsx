@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-import { FormControl, TextField, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { setToken } from "../redux/actions/login";
 
-interface ILoginData {
-	email: string;
-	password: string;
-}
+import { FormControl, TextField, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
 	form: {
@@ -20,28 +17,33 @@ const useStyles = makeStyles({
 	}
 });
 
-const Login: React.FC = () => {
+interface ILoginData {
+	email: string;
+	password: string;
+}
+
+interface ILoginProps {
+	token: boolean;
+}
+
+const Login: React.FC<ILoginProps> = ({ token }) => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const { control, handleSubmit, errors: fieldsErrors, reset } = useForm<ILoginData>();
 
-	useEffect(() => {
-		const token = !!localStorage.getItem("jwt-token");
-		if (token) {
-			dispatch(setToken(token));
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	const onSubmitLogin = (data: ILoginData) => {
+		// диспатчим token в store и очищаем поля формы при submit
 		dispatch(setToken(true));
-		localStorage.setItem("jwt-token", JSON.stringify(true));
-		console.log(data);
 		reset({
 			email: "",
 			password: ""
 		});
 	};
+
+	// если token true то не даем повторно зайти на страницу login
+	if (token) {
+		return <Redirect to='/' />;
+	}
 
 	return (
 		<form onSubmit={handleSubmit(onSubmitLogin)} className={classes.form}>
