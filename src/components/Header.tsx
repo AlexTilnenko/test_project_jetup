@@ -1,27 +1,41 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { AppBar, Toolbar, Button } from "@material-ui/core";
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		root: {
+			justifyContent: "space-between"
+		}
+	})
+);
 
 const Header: React.FC = () => {
+	const classes = useStyles();
+
 	return (
-		<div>
-			<ul>
-				<li>
+		<AppBar position='sticky'>
+			<Toolbar className={classes.root}>
+				<Button color='inherit'>
 					<Link to='/'>Home</Link>
-				</li>
-				<li>
-					<Link to='profile'>Profile</Link>
-				</li>
-				<li>
-					<Link to='weather'>Weather</Link>
-				</li>
-				<li>
-					<Link to='login'>Authorization</Link>
-				</li>
-				<li>
-					<Link to='news'>News</Link>
-				</li>
-			</ul>
-		</div>
+				</Button>
+				<Toolbar className={classes.root}>
+					<Button color='inherit'>
+						<Link to='profile'>Profile</Link>
+					</Button>
+					<Button color='inherit'>
+						<Link to='weather'>Weather</Link>
+					</Button>
+					<Button color='inherit'>
+						<Link to='news'>News</Link>
+					</Button>
+				</Toolbar>
+				<Button color='inherit'>
+					<Link to='login'>Login</Link>
+				</Button>
+			</Toolbar>
+		</AppBar>
 	);
 };
 
