@@ -6,13 +6,18 @@ type SetTokenAction = {
 
 export type LoginActions = SetTokenAction;
 
+export const GET_NEWS = "news/GET_NEWS";
+export type GetNewsAction = {
+	type: typeof GET_NEWS;
+	payload: string;
+};
 export const SET_NEWS = "news/SET_NEWS";
 type SetNewsAction = {
 	type: typeof SET_NEWS;
 	payload: Array<any>;
 };
 
-export type NewsActions = SetNewsAction;
+export type NewsActions = SetNewsAction | GetNewsAction;
 
 export const SAVE_NEWS = "profile/SAVE_NEWS";
 type SaveNewsAction = {

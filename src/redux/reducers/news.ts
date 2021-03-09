@@ -1,15 +1,30 @@
 import * as t from "../actions/types";
 
-type NewsStateTypes = {
-	news: Array<any>;
-};
+export interface IArticle {
+	author: string;
+	content: string;
+	description: string;
+	publishedAt: string;
+	source: { id: string; name: string };
+	title: string;
+	url: string;
+	urlToImage: string;
+}
 
-const initialState: NewsStateTypes = {
+interface INewsState {
+	news: Array<IArticle>;
+}
+
+const initialState: INewsState = {
 	news: []
 };
 
-const newsReducer = (state = initialState, action: t.NewsActions): NewsStateTypes => {
+const newsReducer = (state = initialState, action: t.NewsActions): INewsState => {
 	switch (action.type) {
+		case t.SET_NEWS:
+			return {
+				news: [...action.payload]
+			};
 		default:
 			return state;
 	}
