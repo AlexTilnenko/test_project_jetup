@@ -13,17 +13,21 @@ export interface IArticle {
 
 interface INewsState {
 	news: Array<IArticle>;
+	isLoaded: boolean;
 }
 
 const initialState: INewsState = {
-	news: []
+	news: [],
+	isLoaded: false
 };
 
 const newsReducer = (state = initialState, action: t.NewsActions): INewsState => {
 	switch (action.type) {
 		case t.SET_NEWS:
 			return {
-				news: [...action.payload]
+				...state,
+				news: [...action.payload],
+				isLoaded: true
 			};
 		default:
 			return state;

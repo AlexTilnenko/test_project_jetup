@@ -7,8 +7,9 @@ import { RootState } from "./redux/reducers";
 import { setToken } from "./redux/actions/login";
 import { setInitialized } from "./redux/actions/initialize";
 
-import { Container, CircularProgress } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import "./App.css";
+import { Loader } from "./components";
 
 const App: React.FC = () => {
 	const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const App: React.FC = () => {
 		<div className='App'>
 			<Container maxWidth='lg'>
 				{!isInitialized ? (
-					<CircularProgress className='mt-2' />
+					<Loader />
 				) : (
 					<>
 						<Header token={jwtToken} onLogout={logoutHandler} />
