@@ -20,7 +20,7 @@ interface IWeatherCardProps {
 	weatherData: any;
 }
 
-const WeatherCard: React.FC<IWeatherCardProps> = ({ weatherData }) => {
+const WeatherCard: React.FC<IWeatherCardProps> = React.memo(({ weatherData }) => {
 	const classes = useStyles();
 	const { name, weather, wind, main } = weatherData;
 
@@ -51,6 +51,6 @@ const WeatherCard: React.FC<IWeatherCardProps> = ({ weatherData }) => {
 			<Typography variant='subtitle1' align='left'>{`Wind: ${wind.speed}m/s`}</Typography>
 		</>
 	);
-};
+});
 
 export default WeatherCard;

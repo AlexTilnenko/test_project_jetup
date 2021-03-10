@@ -4,7 +4,7 @@ import { Redirect } from "react-router";
 import { RootState } from "../../redux/reducers";
 
 const withLoginRedirect = <P extends object>(Component: React.ComponentType<P>) => {
-	return (props: any) => {
+	return (props: P) => {
 		const { jwtToken } = useSelector(({ login }: RootState) => login);
 
 		if (!jwtToken) {

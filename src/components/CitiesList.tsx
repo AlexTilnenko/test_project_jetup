@@ -29,35 +29,32 @@ interface ICityesListProps {
 	onRemoveCity: (text: string) => void;
 }
 
-const CitiesList: React.FC<ICityesListProps> = ({
-	citiesList,
-	currentCity,
-	onSelectCity,
-	onRemoveCity
-}) => {
-	const classes = useStyles();
+const CitiesList: React.FC<ICityesListProps> = React.memo(
+	({ citiesList, currentCity, onSelectCity, onRemoveCity }) => {
+		const classes = useStyles();
 
-	return (
-		<div className={classes.wrapper}>
-			{citiesList.map((item) => {
-				return (
-					<div key={item}>
-						<Button
-							variant={currentCity === item ? "contained" : "text"}
-							color={currentCity === item ? "primary" : "default"}
-							className={classes.cityItem}
-							onClick={() => onSelectCity(item)}
-						>
-							{item}
-						</Button>
-						<IconButton className={classes.icon} onClick={() => onRemoveCity(item)}>
-							<DeleteIcon fontSize='small' />
-						</IconButton>
-					</div>
-				);
-			})}
-		</div>
-	);
-};
+		return (
+			<div className={classes.wrapper}>
+				{citiesList.map((item) => {
+					return (
+						<div key={item}>
+							<Button
+								variant={currentCity === item ? "contained" : "text"}
+								color={currentCity === item ? "primary" : "default"}
+								className={classes.cityItem}
+								onClick={() => onSelectCity(item)}
+							>
+								{item}
+							</Button>
+							<IconButton className={classes.icon} onClick={() => onRemoveCity(item)}>
+								<DeleteIcon fontSize='small' />
+							</IconButton>
+						</div>
+					);
+				})}
+			</div>
+		);
+	}
+);
 
 export default CitiesList;

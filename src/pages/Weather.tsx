@@ -13,24 +13,6 @@ const Weather: React.FC = () => {
 		({ weather }: RootState) => weather
 	);
 
-	// useEffect(() => {
-	// const locSuccess = (position: any): void => {
-	// 	const coordinates: { [k: string]: string } = {
-	// 		latitude: position.coords.latitude,
-	// 		longitude: position.coords.longitude
-	// 	};
-	// 	setAutoLocation(true);
-	// 	console.log(coordinates);
-	// };
-	// const locError = (): void => {
-	// 	setAutoLocation(false);
-	// };
-	// navigator.geolocation.getCurrentPosition(locSuccess, locError, {
-	// 	timeout: 1000
-	// });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, []);
-
 	useEffect(() => {
 		dispatch(getWeather(currentCity));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,10 +26,6 @@ const Weather: React.FC = () => {
 		dispatch(removeCity(text));
 	};
 
-	const title: string = "Enter your city",
-		label: string = "City",
-		buttonText: string = "Press to enter city";
-
 	return (
 		<div className='mt-1 '>
 			<Grid container spacing={3}>
@@ -60,9 +38,9 @@ const Weather: React.FC = () => {
 						onRemoveCity={handleRemoveCity}
 					/>
 					<AddCityForm
-						title={title}
-						label={label}
-						buttonText={buttonText}
+						title={"Enter your city"}
+						label={"City"}
+						buttonText={"Press to enter city"}
 						valueHandler={handleClickCity}
 					/>
 				</Grid>

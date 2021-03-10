@@ -18,7 +18,7 @@ interface IHeaderProps {
 	onLogout: () => void;
 }
 
-const Header: React.FC<IHeaderProps> = ({ token, onLogout }) => {
+const Header: React.FC<IHeaderProps> = React.memo(({ token, onLogout }) => {
 	const classes = useStyles();
 
 	return (
@@ -48,6 +48,6 @@ const Header: React.FC<IHeaderProps> = ({ token, onLogout }) => {
 			</Toolbar>
 		</AppBar>
 	);
-};
+});
 
 export default Header;

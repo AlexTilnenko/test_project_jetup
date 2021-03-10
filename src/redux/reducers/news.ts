@@ -26,7 +26,7 @@ const newsReducer = (state = initialState, action: t.NewsActions): INewsState =>
 		case t.SET_NEWS:
 			return {
 				...state,
-				news: [...action.payload],
+				news: action.payload ? [...action.payload] : [],
 				isLoaded: true
 			};
 		default:

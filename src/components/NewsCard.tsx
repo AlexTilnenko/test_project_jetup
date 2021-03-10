@@ -36,7 +36,7 @@ interface INewsCardProps {
 const imgPlaceholder: string =
 	"https://peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg";
 
-const NewsCard: React.FC<INewsCardProps> = ({ data, savedNews }) => {
+const NewsCard: React.FC<INewsCardProps> = React.memo(({ data, savedNews }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const [isSaved, setIsSaved] = useState<boolean>(false);
@@ -107,6 +107,6 @@ const NewsCard: React.FC<INewsCardProps> = ({ data, savedNews }) => {
 			</CardActions>
 		</Card>
 	);
-};
+});
 
 export default NewsCard;
