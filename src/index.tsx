@@ -8,12 +8,10 @@ import App from "./App";
 import "./index.css";
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<Router basename='/'>
-				<App />
-			</Router>
-		</Provider>
-	</React.StrictMode>,
+	<Provider store={store}>
+		<Router basename='/'>
+			<App />
+		</Router>
+	</Provider>,
 	document.getElementById("root")
 );

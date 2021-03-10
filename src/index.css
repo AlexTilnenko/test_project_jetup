@@ -18,10 +18,6 @@ body {
 	color: #000;
 }
 
-a,
-span,
-p,
-b,
 h1,
 h2,
 h3,
@@ -32,6 +28,10 @@ h5 {
 
 h1 {
 	font-size: 48px;
+}
+a,
+b {
+	color: #fff;
 }
 
 h2 {
@@ -50,4 +50,8 @@ a {
 
 .mt-2 {
 	margin-top: 100px;
+}
+
+.mb-1 {
+	margin-bottom: 50px;
 }

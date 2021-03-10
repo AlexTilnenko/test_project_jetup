@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { saveNews } from "../redux/actions/profile";
 import { removeNews } from "../redux/actions/profile";
+import { RootState } from "../redux/reducers";
 import { IArticle } from "../redux/reducers/news";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,14 +14,9 @@ import {
 	CardContent,
 	CardActions,
 	Button,
-	Link
+	Link,
+	Box
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-
-interface INewsItemProps {
-	data: IArticle;
-	savedNews: Array<IArticle>;
-}
 
 const useStyles = makeStyles({
 	root: {
@@ -31,13 +28,19 @@ const useStyles = makeStyles({
 	}
 });
 
+interface INewsCardProps {
+	data: IArticle;
+	savedNews: Array<IArticle>;
+}
+
 const imgPlaceholder: string =
 	"https://peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg";
 
-const NewsCard: React.FC<INewsItemProps> = ({ data, savedNews }) => {
+const NewsCard: React.FC<INewsCardProps> = ({ data, savedNews }) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const [isSaved, setIsSaved] = useState<boolean>(false);
+	const { jwtToken } = useSelector(({ login }: RootState) => login);
 
 	useEffect(() => {
 		const currentNews = savedNews.filter((item) => item.url === data.url)[0];
@@ -56,7 +59,7 @@ const NewsCard: React.FC<INewsItemProps> = ({ data, savedNews }) => {
 		dispatch(saveNews(news));
 	};
 	// удаляем сохраненную новость из state
-	const removeNewsHandler = (url: string) => {
+	const removeNewsHandler = (url: string): void => {
 		dispatch(removeNews(url));
 	};
 
@@ -79,14 +82,22 @@ const NewsCard: React.FC<INewsItemProps> = ({ data, savedNews }) => {
 				</CardContent>
 			</CardActionArea>
 			<CardActions>
-				{isSaved ? (
-					<Button size='small' color='primary' onClick={() => removeNewsHandler(data.url)}>
-						Remove
-					</Button>
-				) : (
-					<Button size='small' color='primary' onClick={() => saveNewsHandler(data)}>
-						Save
-					</Button>
+				{jwtToken && (
+					<Box>
+						{isSaved ? (
+							<Button
+								size='small'
+								color='primary'
+								onClick={() => removeNewsHandler(data.url)}
+							>
+								Remove
+							</Button>
+						) : (
+							<Button size='small' color='primary' onClick={() => saveNewsHandler(data)}>
+								Save
+							</Button>
+						)}
+					</Box>
 				)}
 				<Button size='small' color='primary'>
 					<Link href={url} rel='noreferrer' target='_blank' color='inherit'>

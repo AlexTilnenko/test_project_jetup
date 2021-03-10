@@ -1,6 +1,7 @@
-import { all, fork } from "redux-saga/effects";
+import { all } from "redux-saga/effects";
 import newsSagas from "./newsSagas";
+import weatherSagas from "./weatherSagas";
 
 export default function* rootSaga() {
-	yield all([fork(newsSagas)]);
+	yield all([newsSagas(), weatherSagas()]);
 }

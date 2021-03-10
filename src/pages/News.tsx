@@ -10,7 +10,9 @@ const News: React.FC = () => {
 	const { savedNews } = useSelector(({ profile }: RootState) => profile);
 
 	useEffect(() => {
-		dispatch(getNews("frontend"));
+		if (news.length === 0) {
+			dispatch(getNews("frontend"));
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

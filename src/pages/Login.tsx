@@ -27,11 +27,11 @@ interface ILoginProps {
 }
 
 const Login: React.FC<ILoginProps> = ({ token }) => {
-	const dispatch = useDispatch();
 	const classes = useStyles();
+	const dispatch = useDispatch();
 	const { control, handleSubmit, errors: fieldsErrors, reset } = useForm<ILoginData>();
 
-	const onSubmitLogin = (data: ILoginData) => {
+	const onSubmitLogin = (data: ILoginData): void => {
 		// диспатчим token в store и очищаем поля формы при submit
 		dispatch(setToken(true));
 		reset({
